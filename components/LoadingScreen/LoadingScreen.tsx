@@ -1,7 +1,7 @@
+import styles from "./LoadingScreen.module.sass";
 import React from "react";
 import Popup from "../Popup/Popup";
 import HelixSpinner from "../spinners/HelixSpinner/HelixSpinner";
-import styles from "./LoadingScreen.module.scss";
 
 
 interface LoadingScreenProps {

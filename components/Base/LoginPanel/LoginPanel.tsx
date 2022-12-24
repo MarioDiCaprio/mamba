@@ -1,10 +1,10 @@
+import styles from "./LoginPanel.module.sass";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Link from "next/link";
 import { AiOutlineUser as UserIcon } from 'react-icons/ai';
 import { RiKey2Line as KeyIcon } from 'react-icons/ri';
-import styles from "./LoginPanel.module.scss";
 import { useRouter } from "next/router";
 import LoadingScreen from "../../LoadingScreen/LoadingScreen";
 import { useLoginMutation } from "../../../redux/api/mambaApi";

@@ -1,8 +1,8 @@
+import styles from './FriendsPanel.module.sass';
 import React from 'react';
 import useClient from "../../../hooks/useClient";
 import { useUserBasicDataQuery } from "../../../redux/api/mambaApi";
 import { BsFillChatSquareDotsFill as ChatIcon } from "react-icons/bs";
-import styles from './FriendsPanel.module.scss';
 
 
 const FriendPreview: React.FC<{ userId: string | null }> = ({ userId }) => {

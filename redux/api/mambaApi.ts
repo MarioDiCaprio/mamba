@@ -3,6 +3,7 @@ import {SERVER_URL} from "../../variables";
 import {HYDRATE} from "next-redux-wrapper";
 import {RootState} from "../store";
 import {UserBasicDataResponse, UserResponse} from "../models/user";
+import {SearchUsersResponse} from "../models/search";
 
 
 export const mambaApi = createApi({
@@ -58,6 +59,14 @@ export const mambaApi = createApi({
             })
         }),
 
+        searchUsers: builder.query<SearchUsersResponse, string | null>({
+            query: term => ({
+                url: '/search/users',
+                params: { term },
+                method: 'GET'
+            })
+        }),
+
     }),
 });
 
@@ -65,5 +74,6 @@ export const {
     useLoginMutation,
     useSignupMutation,
     useUserByUsernameQuery,
-    useUserBasicDataQuery
+    useUserBasicDataQuery,
+    useSearchUsersQuery
 } = mambaApi;

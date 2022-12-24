@@ -1,4 +1,4 @@
-import styles from "./Topbar.module.sass";
+import styles from "./TopBar.module.sass";
 import React, { useState } from "react";
 import Link from "next/link";
 import { AiOutlineSearch as SearchIcon } from 'react-icons/ai';

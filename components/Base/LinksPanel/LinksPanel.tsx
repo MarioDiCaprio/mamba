@@ -1,7 +1,7 @@
+import styles from "./LinksPanel.module.sass";
 import React from "react";
 import { MdOutlineCollectionsBookmark as ActivityIcon } from 'react-icons/md';
 import { BsHeartFill as LikesIcon } from 'react-icons/bs';
-import styles from "./LinksPanel.module.scss";
 import { useRouter } from "next/router";
 
 
