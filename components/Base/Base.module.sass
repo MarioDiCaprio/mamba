@@ -1,0 +1,141 @@
+@import "../../styles/colors"
+@import "../../styles/dimensions"
+@import "../../styles/rainbow"
+
+
+.main
+    width: 100vw
+    height: 100vh
+    display: flex
+
+.sidebar
+    width: 22%
+    height: 100%
+    overflow-y: auto
+    overflow-x: hidden
+    transition: 0.3s
+    @media (max-width: $large), (max-height: 700px)
+        width: 90px
+        margin: 0
+        padding: 0
+    @media (max-width: $small)
+        width: 0
+        opacity: 0
+        visibility: hidden
+
+.container
+    width: 78%
+    height: 100%
+    transition: 0.3s
+    @media (max-width: $large), (max-height: 700px)
+        width: calc(100% - 90px)
+    @media (max-width: $small)
+        width: 100%
+
+.contextWrapper
+    width: 100%
+    height: calc(100% - 80px)
+    display: flex
+    overflow-y: scroll
+    overflow-x: hidden
+
+.context
+    width: 66.66%
+    height: min-content
+    min-height: 100%
+    border-left: 1px solid #e7edf2
+    border-right: 1px solid #e7edf2
+    padding: 20px 30px 20px 30px
+    font-family: "Quicksand", serif
+    background: rgb(250, 250, 250)
+    transition: 0.3s
+    @media (max-width: $large), (max-height: 700px)
+        border-right: none
+        width: 100%
+    @media (max-width: $small)
+        padding-left: 0
+        padding-right: 0
+
+.members
+    width: 33.33%
+    height: 100%
+    padding: 40px
+    position: sticky
+    top: 0
+    transition: 0.3s
+    @media (max-width: $large)
+        padding: 0
+        width: 0
+        visibility: hidden
+
+.sidebarBox1
+    background: white radial-gradient(circle, transparent 0%, rgba($vibrant-light, 0.1) 70%, rgba($vibrant-light, 0.2) 100%)
+    height: 40%
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding-top: 25%
+    @media (max-width: $large), (max-height: 700px)
+        padding-top: 0
+        height: 80px
+        cursor: pointer
+
+.sidebarBox2
+    background: linear-gradient(-45deg, $vibrant, $vibrant-light)
+    height: 60%
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding-top: 45%
+    @media (max-width: $large), (max-height: 700px)
+        height: calc(100% - 80px)
+
+.sidebarLogo
+    display: block
+    max-width: 225px
+    max-height: 125px
+    width: auto
+    height: auto
+    margin: 20px
+    pointer-events: none
+    @media (max-width: $large), (max-height: 700px)
+        height: 0
+        line-height: 0
+        visibility: hidden
+
+.sidebarLogoSmall
+    width: 80px
+    height: 80px
+    padding: 15px
+    visibility: hidden
+    position: fixed
+    top: 0
+    @media (max-width: $large), (max-height: 700px)
+        visibility: visible
+
+.hr
+    border: none
+    border-bottom: 1px solid #e7edf2
+    border-radius: 0
+    width: 100%
+
+.loginOrAccountPanel
+    visibility: visible
+    transition: 0s
+    @media (max-width: $large), (max-height: 700px)
+        opacity: 0
+        visibility: hidden
+
+.makePostButton
+    @include rainbowHoverable
+    width: 100%
+    height: 40px
+    margin-bottom: 35px
+    border: none
+    border-radius: 40px
+    font-family: "Montserrat Alternates", serif
+    color: white
+    font-size: large
+    cursor: pointer
