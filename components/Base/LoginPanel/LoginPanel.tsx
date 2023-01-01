@@ -44,10 +44,15 @@ const LoginPanel: React.FC = () => {
                 .unwrap()
                 .then(() => {
                     router.reload();
-                }).catch(_error => {
-                    // TODO handle HTTP errors
-                    // if server error occurred: stop loading and show error message
-                    formik.setErrors({ username: "Failed to connect to server" });
+                }).catch(error => {
+                    switch (error.status) {
+                        case 401:
+                            formik.setErrors({ password: "Username or password invalid" });
+                            break;
+                        case 404:
+                            formik.setErrors({ password: "Failed to connect to server" });
+                            break;
+                    }
                 });
         }
     });

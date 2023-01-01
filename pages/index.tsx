@@ -5,6 +5,10 @@ import {FaUserFriends as CommunityIcon} from "react-icons/fa";
 import {MdPhotoCamera as CameraIcon} from "react-icons/md";
 import {FaPaintBrush as BrushIcon} from "react-icons/fa";
 import Link from "next/link";
+import {useFormik} from "formik";
+import * as Yup from "yup";
+import {useLoginMutation} from "../redux/api/mambaApi";
+import {useRouter} from "next/router";
 
 
 const Navbar: React.FC = () => {
@@ -17,6 +21,42 @@ const Navbar: React.FC = () => {
 
 
 const Index: NextPage = () => {
+    const [login] = useLoginMutation();
+
+    const router = useRouter();
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: ''
+        },
+        validationSchema: Yup.object({
+            username: Yup.string().required('Username is required'),
+            password: Yup.string().required('Password is required')
+        }),
+        onSubmit: (values) => {
+            // server is now loading
+            // extract values from form
+            const username = (values.username === '')? null : values.username;
+            const password = (values.username === '')? null : values.password;
+            // make login request (and remember login)
+            login({ username, password })
+                .unwrap()
+                .then(() => {
+                    router.reload();
+                }).catch(error => {
+                    switch (error.status) {
+                        case 401:
+                            formik.setErrors({ password: "Username or password invalid" });
+                            break;
+                        case 404:
+                            formik.setErrors({ password: "Failed to connect to server" });
+                            break;
+                    }
+            });
+        }
+    });
+
     return (
         <div className={styles.context}>
 
@@ -67,9 +107,39 @@ const Index: NextPage = () => {
 
                     <div className={styles.rightPanel}>
                         <h1>Welcome</h1>
-                        <form>
-                            <input className={styles.input} placeholder="Username" />
-                            <input className={styles.input} placeholder="Password" />
+                        <form onSubmit={formik.handleSubmit}>
+
+                            <input
+                                className={styles.input}
+                                autoComplete="new-password"
+                                placeholder="Username"
+                                id="username"
+                                name="username"
+                                value={formik.values.username}
+                                onChange={formik.handleChange}
+                                data-test="username"
+                            />
+
+                            <span className={styles.inputError}>
+                                { formik.touched.username && formik.errors.username }
+                            </span>
+
+                            <input
+                                className={styles.input}
+                                autoComplete="new-password"
+                                type="password"
+                                placeholder="Password"
+                                id="password"
+                                name="password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                data-test="password"
+                            />
+
+                            <span className={styles.inputError}>
+                                { formik.touched.password && formik.errors.password }
+                            </span>
+
                             <button className={styles.loginButton} type="submit">
                                 Login
                             </button>
