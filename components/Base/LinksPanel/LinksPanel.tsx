@@ -30,13 +30,13 @@ const LinksPanel: React.FC = () => {
         <div className={styles.linksPanel}>
 
             {/* Activity */}
-            <div className={linkStyle('activity')} data-test="activity">
+            <div className={linkStyle('/activity')} data-test="activity">
                 <ActivityIcon onClick={() => router.push('/activity')} data-test="activity-icon"/>
                 <span>Activity</span>
             </div>
 
             {/* Likes */}
-            <div className={linkStyle('likes')} data-test="likes">
+            <div className={linkStyle('/likes')} data-test="likes">
                 <LikesIcon onClick={() => router.push('/likes')} data-test="likes-icon"/>
                 <span>Likes</span>
             </div>

@@ -62,7 +62,9 @@ const FriendsPanel: React.FC = () => {
 
     return (
         <div className={styles.context}>
-            <h2>Friends</h2>
+            <h1 className={styles.header}>
+                Friends
+            </h1>
             <hr />
             <div className={styles.friendsListWrapper}>
                 { friends }
