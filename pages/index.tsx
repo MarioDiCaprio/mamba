@@ -9,9 +9,10 @@ import {useFormik} from "formik";
 import * as Yup from "yup";
 import {useLoginMutation} from "../redux/api/mambaApi";
 import {useRouter} from "next/router";
+import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
     return (
         <div className={styles.navbar}>
 
@@ -21,7 +22,7 @@ const Navbar: React.FC = () => {
 
 
 const Index: NextPage = () => {
-    const [login] = useLoginMutation();
+    const [login, { isLoading }] = useLoginMutation();
 
     const router = useRouter();
 
@@ -52,6 +53,12 @@ const Index: NextPage = () => {
                         case 404:
                             formik.setErrors({ password: "Failed to connect to server" });
                             break;
+                        case 500:
+                            formik.setErrors({ password: "Internal server error occurred" });
+                            break;
+                        default:
+                            formik.setErrors({ password: "An unknown error occurred" });
+                            break;
                     }
             });
         }
@@ -59,6 +66,8 @@ const Index: NextPage = () => {
 
     return (
         <div className={styles.context}>
+
+            <LoadingScreen open={isLoading} />
 
             <Navbar />
 

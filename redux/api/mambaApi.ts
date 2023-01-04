@@ -28,15 +28,18 @@ export const mambaApi = createApi({
     },
     endpoints: builder => ({
 
-        login: builder.mutation<string, { username: string | null, password: string | null }>({
+        login: builder.mutation<{ token: string }, { username: string | null, password: string | null }>({
             query: args => ({
                 url: '/login',
-                params: args,
+                body: args,
+                headers: {
+                    "Authorization": "Basic " + Buffer.from(args.username + ':' + args.password).toString('base64')
+                },
                 method: 'POST'
             }),
             async onQueryStarted(request, { dispatch, queryFulfilled }) {
                 queryFulfilled
-                    .then(({ data: token }) => {
+                    .then(({ data: { token } }) => {
                         dispatch(setAuthToken({ token, username: request.username }));
                     })
                     .catch(() => {
@@ -45,7 +48,7 @@ export const mambaApi = createApi({
             }
         }),
 
-        signup: builder.mutation<void, { username: string, email: string, password: string }>({
+        signup: builder.mutation<void, { username: string | null, email: string | null, password: string | null}>({
             query: args => ({
                 url: '/register',
                 body: args,
