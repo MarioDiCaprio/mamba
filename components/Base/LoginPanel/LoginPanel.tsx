@@ -52,6 +52,12 @@ const LoginPanel: React.FC = () => {
                         case 404:
                             formik.setErrors({ password: "Failed to connect to server" });
                             break;
+                        case 500:
+                            formik.setErrors({ password: "Internal server error occurred" });
+                            break;
+                        default:
+                            formik.setErrors({ password: "An unknown error occurred" });
+                            break;
                     }
                 });
         }
@@ -121,7 +127,7 @@ const LoginPanel: React.FC = () => {
                 </button>
 
                 {/* Registration Link */}
-                <Link href="/register">
+                <Link href="/signup">
                         <span className={styles.signupLink}>
                             Sign up instead
                         </span>
