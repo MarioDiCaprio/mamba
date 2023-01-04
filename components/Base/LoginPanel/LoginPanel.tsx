@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import Link from "next/link";
 import { AiOutlineUser as UserIcon } from 'react-icons/ai';
 import { RiKey2Line as KeyIcon } from 'react-icons/ri';
-import { useRouter } from "next/router";
 import LoadingScreen from "../../LoadingScreen/LoadingScreen";
 import { useLoginMutation } from "../../../redux/api/mambaApi";
 
@@ -20,9 +19,6 @@ import { useLoginMutation } from "../../../redux/api/mambaApi";
 const LoginPanel: React.FC = () => {
     /** Used to make a login request to the server */
     const [login, { isLoading }] = useLoginMutation();
-
-    /** Used to reload page if login was successful */
-    const router = useRouter();
 
     /** Formik object. */
     const formik = useFormik({
@@ -42,9 +38,7 @@ const LoginPanel: React.FC = () => {
             // make login request (and remember login)
             login({ username, password })
                 .unwrap()
-                .then(() => {
-                    router.reload();
-                }).catch(error => {
+                .then().catch(error => {
                     switch (error.status) {
                         case 401:
                             formik.setErrors({ password: "Username or password invalid" });
