@@ -4,6 +4,7 @@ import {HYDRATE} from "next-redux-wrapper";
 import {RootState} from "../store";
 import {UserBasicDataResponse, UserResponse} from "../models/user";
 import {SearchUsersResponse} from "../models/search";
+import {setAuthToken} from "../slices/authSlice";
 
 
 export const mambaApi = createApi({
@@ -14,7 +15,7 @@ export const mambaApi = createApi({
             // authorization token
             const jwtToken = (api.getState() as RootState).auth.token;
             if (jwtToken) {
-                headers.set('Authorization', `Basic ${jwtToken}`);
+                headers.set('Authorization', `Bearer ${jwtToken}`);
             }
             // finalize
             return headers;
@@ -27,12 +28,21 @@ export const mambaApi = createApi({
     },
     endpoints: builder => ({
 
-        login: builder.mutation<void, { username: string | null, password: string | null }>({
+        login: builder.mutation<string, { username: string | null, password: string | null }>({
             query: args => ({
                 url: '/login',
                 params: args,
                 method: 'POST'
-            })
+            }),
+            async onQueryStarted(request, { dispatch, queryFulfilled }) {
+                queryFulfilled
+                    .then(({ data: token }) => {
+                        dispatch(setAuthToken({ token, username: request.username }));
+                    })
+                    .catch(() => {
+                        dispatch(setAuthToken({ token: null, username: null }));
+                    });
+            }
         }),
 
         signup: builder.mutation<void, { username: string, email: string, password: string }>({

@@ -2,27 +2,18 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 interface AuthState {
-    token: string | null;
-}
-
-interface AuthParams {
     username: string | null;
-    password: string | null;
+    token: string | null;
 }
 
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { token: null } as AuthState,
+    initialState: { token: null, username: null } as AuthState,
     reducers: {
 
-        setAuthToken: (_state, action: PayloadAction<AuthParams>) => {
-            let { username, password } = action.payload;
-            if (!username || !password) {
-                return { token: null };
-            }
-            let base64 = Buffer.from(`${username}:${password}`).toString('base64');
-            return { token: base64 };
+        setAuthToken: (_state, action: PayloadAction<AuthState>) => {
+            return action.payload;
         }
 
     }

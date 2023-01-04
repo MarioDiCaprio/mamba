@@ -43,7 +43,7 @@ const Index: NextPage = () => {
             login({ username, password })
                 .unwrap()
                 .then(() => {
-                    router.reload();
+                    router.push("/activity");
                 }).catch(error => {
                     switch (error.status) {
                         case 401:
