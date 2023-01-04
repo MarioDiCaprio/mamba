@@ -4,7 +4,7 @@ import Base from "../components/Base/Base";
 
 const Activity: NextPage = () => {
     return (
-        <Base />
+        <Base title="Mamba | Activity" />
     );
 }
 

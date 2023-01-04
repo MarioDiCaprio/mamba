@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import {useLoginMutation} from "../redux/api/mambaApi";
 import {useRouter} from "next/router";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
+import Head from "next/head";
 
 
 export const Navbar: React.FC = () => {
@@ -66,6 +67,10 @@ const Index: NextPage = () => {
 
     return (
         <div className={styles.context}>
+
+            <Head>
+                <title>Mamba | Home</title>
+            </Head>
 
             <LoadingScreen open={isLoading} />
 

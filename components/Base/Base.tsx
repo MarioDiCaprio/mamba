@@ -10,6 +10,7 @@ import SearchResults from "./SearchResults/SearchResults";
 import TopBar from "./TopBar/TopBar";
 import {UserResponse} from "../../redux/models/user";
 import useClient from "../../hooks/useClient";
+import Head from "next/head";
 
 
 /**
@@ -71,9 +72,13 @@ const Sidebar: React.FC = () => {
 interface BaseProps {
     /**
      * The children of this node. These are rendered inside
-     * of the main panel in the center.
+     * the main panel in the center.
      * */
     children?: React.ReactNode;
+    /**
+     * This page's title, i.e. the document head's title.
+     */
+    title: string;
 }
 
 /**
@@ -85,7 +90,7 @@ interface BaseProps {
  * @returns The base component
  * @see {@link BaseProps}
  */
-const Base: React.FC<BaseProps> = (props) => {
+const Base: React.FC<BaseProps> = ({ children, title }) => {
     const router = useRouter();
     const { data: client } = useClient();
     const [searchExpression, setSearchExpression] = useState<string>('');
@@ -108,11 +113,15 @@ const Base: React.FC<BaseProps> = (props) => {
                     Make A Post
                 </button>
                 {/* Content */}
-                { props.children }
+                { children }
             </>
 
     return (
         <div className={styles.main}>
+
+            <Head>
+                <title>{ title }</title>
+            </Head>
 
             {/* The sidebar */}
             <Sidebar />
