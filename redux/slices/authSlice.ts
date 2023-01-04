@@ -1,4 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import Cookies from "universal-cookie";
+
+
+const cookies = new Cookies();
 
 
 interface AuthState {
@@ -7,12 +11,19 @@ interface AuthState {
 }
 
 
+let initialState: AuthState = cookies.get('auth');
+if (!initialState) {
+    initialState = { token: null, username: null }
+}
+
+
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { token: null, username: null } as AuthState,
+    initialState,
     reducers: {
 
         setAuthToken: (_state, action: PayloadAction<AuthState>) => {
+            cookies.set('auth', action.payload, { sameSite: 'strict' })
             return action.payload;
         }
 
