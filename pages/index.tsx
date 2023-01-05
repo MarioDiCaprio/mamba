@@ -11,11 +11,23 @@ import {useLoginMutation} from "../redux/api/mambaApi";
 import {useRouter} from "next/router";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import Head from "next/head";
+import {AiOutlineUser as UserIcon} from "react-icons/ai";
+import {RiKey2Line as KeyIcon} from "react-icons/ri";
 
 
 export const Navbar: React.FC = () => {
     return (
         <div className={styles.navbar}>
+
+            <div className={styles.navbarLogo}>
+                <img  src="/logo/logo-icon.png" alt="" />
+                <span>Mamba</span>
+            </div>
+
+            <div className={styles.navbarLinks}>
+                <Link href="/">Home</Link>
+                <Link href="/activity">Activity</Link>
+            </div>
 
         </div>
     );
@@ -120,35 +132,46 @@ const Index: NextPage = () => {
                     </div>
 
                     <div className={styles.rightPanel}>
+                        <img src="/logo/logo-icon.png" alt="" />
                         <h1>Welcome</h1>
                         <form onSubmit={formik.handleSubmit}>
 
-                            <input
-                                className={styles.input}
-                                autoComplete="new-password"
-                                placeholder="Username"
-                                id="username"
-                                name="username"
-                                value={formik.values.username}
-                                onChange={formik.handleChange}
-                                data-test="username"
-                            />
+                            <div className={styles.inputWrapper}>
+                                <div className={styles.inputIcon}>
+                                    <UserIcon />
+                                </div>
+                                <input
+                                    autoComplete="new-password"
+                                    placeholder="Username"
+                                    className={styles.input}
+                                    id="username"
+                                    name="username"
+                                    value={formik.values.username}
+                                    onChange={formik.handleChange}
+                                    data-test="username"
+                                />
+                            </div>
 
                             <span className={styles.inputError}>
                                 { formik.touched.username && formik.errors.username }
                             </span>
 
-                            <input
-                                className={styles.input}
-                                autoComplete="new-password"
-                                type="password"
-                                placeholder="Password"
-                                id="password"
-                                name="password"
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                data-test="password"
-                            />
+                            <div className={styles.inputWrapper}>
+                                <div className={styles.inputIcon}>
+                                    <KeyIcon />
+                                </div>
+                                <input
+                                    autoComplete="new-password"
+                                    type="password"
+                                    placeholder="Password"
+                                    className={styles.input}
+                                    id="password"
+                                    name="password"
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
+                                    data-test="password"
+                                />
+                            </div>
 
                             <span className={styles.inputError}>
                                 { formik.touched.password && formik.errors.password }

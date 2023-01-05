@@ -1,10 +1,37 @@
 @import "colors"
+@import "dimensions"
 
 
 .context
     height: 100vh
+    margin: 0
     display: flex
     flex-direction: column
+    @media (max-width: $small)
+        height: unset
+
+.navbar
+    width: 100vw
+    height: 100px
+    display: flex
+    justify-content: space-around
+    align-items: center
+    .navbarLogo
+        display: flex
+        align-items: center
+        gap: 10px
+    .navbarLogo > img
+        width: 50px
+        height: 50px
+    .navbarLogo > span
+        font-family: "Montserrat Alternates", sans-serif
+        font-size: 1.75rem
+        color: #3a3a3a
+    .navbarLinks
+        color: #3d3d3d
+        font-family: "Montserrat Alternates", sans-serif
+        display: flex
+        gap: 20px
 
 .main
     width: 100%
@@ -12,12 +39,20 @@
     display: flex
     justify-content: center
     align-items: center
+    @media (max-width: $small)
+        align-items: flex-start
+        height: fit-content
 
 .panelContainer
     width: 750px
     height: 520px
     display: flex
     justify-content: space-around
+    @media (max-width: $small)
+        width: 100%
+        height: fit-content
+        flex-direction: column-reverse
+        justify-content: flex-start
 
 .leftPanel, .rightPanel
     width: 50%
@@ -29,6 +64,8 @@
     h1
         font-size: 1.36rem
         font-family: "Quicksand", sans-serif
+    @media (max-width: $small)
+        width: 100%
 
 .leftPanel
     align-items: flex-start
@@ -64,6 +101,8 @@
 .rightPanel
     align-items: center
     background: #ffffff
+    img
+        width: 75px
     h1
         color: #4f515b
     form
@@ -72,15 +111,35 @@
         align-items: center
     .input
         width: 100%
-        height: 40px
+        height: 42px
         margin: 8px
-        padding: 8px 16px 8px 48px
         line-height: 25px
         border-radius: 50px
         border: none
         background: #f7f7f7
         color: #626c72
         outline: none
+    .inputWrapper
+        border-radius: 50px
+        border: none
+        height: 42px
+        width: 100%
+        padding-left: 4px
+        margin-bottom: 8px
+        display: flex
+        align-items: center
+        justify-content: left
+        font-size: larger
+        background: #f7f7f7
+    .inputIcon
+        width: 38px
+        height: 38px
+        background: white
+        border-radius: 50%
+        padding: 10px
+        display: flex
+        justify-content: center
+        align-items: center
     .inputError
         color: $vibrant-light
         font-size: small

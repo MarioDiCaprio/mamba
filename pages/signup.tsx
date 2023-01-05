@@ -56,11 +56,15 @@ const Signup: NextPage = () => {
 
     return (
         <div className={styles.context}>
+
             <Head>
                 <title>Mamba | Sign Up</title>
             </Head>
+
             <LoadingScreen open={isLoading} />
+
             <Navbar />
+
             <div className={styles.container}>
                 {/* Form + Header */}
                 <div className={styles.formAndHeader}>
@@ -72,8 +76,8 @@ const Signup: NextPage = () => {
 
                     {/* Description */}
                     <p className={styles.description}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                        tellus, luctus nec ullamcorper mattis.
+                        Join a large community and share your artistic self with like-minded
+                        people
                     </p>
 
                     {/* Form */}
