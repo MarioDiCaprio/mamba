@@ -1,0 +1,68 @@
+@import "../styles/colors"
+
+
+.viewer
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 10px
+
+.imageWrapper
+    width: 100%
+    height: 100%
+    border-radius: 10px
+
+.image
+    width: 100%
+    height: 100%
+    object-fit: cover
+    border-radius: inherit
+    cursor: pointer
+    z-index: 600
+    transition: 0.3s
+
+.chooser
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+
+.chooserButton
+    width: 100%
+    padding: 15px
+    margin-top: 10px
+    border-radius: 14px
+    border: none
+    font-family: 'Montserrat Alternates', serif
+    font-weight: 700
+    font-size: medium
+    color: white
+    background: $vibrant
+    cursor: pointer
+    transition: 0.3s
+    &:hover
+        background: lighten($vibrant-light, 10%)
+        transition: 0.3s
+
+.chooserInput
+    display: none
+
+.chooserImage
+    width: 100%
+    height: 100%
+    object-fit: cover
+    border-radius: 10px
+    cursor: pointer
+
+.decoBox
+    width: 100%
+    height: 100%
+    border-radius: 10px
+    background: radial-gradient(circle, lighten($vibrant-light, 15%), lighten($vibrant-light, 7%))
+    cursor: pointer
+    transition: 0.3s
+    &:hover
+        transform: translateY(-10px)
+        transition: 0.3s

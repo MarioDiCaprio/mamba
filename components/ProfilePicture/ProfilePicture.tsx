@@ -2,7 +2,7 @@ import React, {ImgHTMLAttributes} from "react";
 
 
 interface ProfilePictureProps {
-    bytes: number[] | null;
+    bytes: string | null;
     imgProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'>;
 }
 

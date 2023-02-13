@@ -5,6 +5,8 @@ import {RootState} from "../store";
 import {UserBasicDataResponse, UserResponse} from "../models/user";
 import {SearchUsersResponse} from "../models/search";
 import {setAuthToken} from "../slices/authSlice";
+import {LikeRequest, PostCreationRequest, PostResponse} from "../models/post";
+import {PageResponse} from "../models/page";
 
 
 export const mambaApi = createApi({
@@ -56,6 +58,14 @@ export const mambaApi = createApi({
             })
         }),
 
+        userById: builder.query<UserResponse, string | null>({
+            query: userId => ({
+                url: '/user/byId',
+                params: { userId },
+                method: 'GET'
+            })
+        }),
+
         userByUsername: builder.query<UserResponse, string | null>({
             query: username => ({
                 url: '/user/byUsername',
@@ -80,13 +90,41 @@ export const mambaApi = createApi({
             })
         }),
 
+        postCreate: builder.mutation<void, PostCreationRequest>({
+            query: args => ({
+                url: '/post/create',
+                body: args,
+                method: 'POST'
+            })
+        }),
+
+        postAll: builder.query<PageResponse<PostResponse>, number>({
+            query: page => ({
+                url: '/post/all',
+                params: { page },
+                method: 'GET'
+            })
+        }),
+
+        userLike: builder.mutation<void, LikeRequest>({
+            query: args => ({
+                url: '/user/like',
+                params: args,
+                method: 'POST'
+            })
+        }),
+
     }),
 });
 
 export const {
     useLoginMutation,
     useSignupMutation,
+    useUserByIdQuery,
     useUserByUsernameQuery,
     useUserBasicDataQuery,
-    useSearchUsersQuery
+    useSearchUsersQuery,
+    usePostCreateMutation,
+    usePostAllQuery,
+    useUserLikeMutation
 } = mambaApi;
