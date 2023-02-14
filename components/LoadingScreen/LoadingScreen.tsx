@@ -1,7 +1,7 @@
 import styles from "./LoadingScreen.module.sass";
 import React from "react";
 import Popup from "../Popup/Popup";
-import HelixSpinner from "../spinners/HelixSpinner/HelixSpinner";
+import {motion} from "framer-motion";
 
 
 interface LoadingScreenProps {
@@ -11,9 +11,16 @@ interface LoadingScreenProps {
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ open }) => {
     return (
         <Popup open={open}>
-            <div className={styles.content} data-test="loadingScreen">
-                <HelixSpinner />
-            </div>
+
+            <motion.img
+                alt=""
+                src="/logo/logo-icon.png"
+                className={styles.image}
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 180 }}
+                transition={{ type: 'spring', duration: 1.2, delay: 1, repeat: Infinity }}
+            />
+
         </Popup>
     );
 }
